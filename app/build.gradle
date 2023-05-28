@@ -1,0 +1,86 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
+    id 'com.google.dagger.hilt.android'
+
+}
+
+apply from: rootProject.file('dependencies.gradle')
+
+android {
+    namespace 'com.example.pta'
+    compileSdk 33
+
+    defaultConfig {
+        applicationId "com.example.pta"
+        minSdk versions.minSdk
+        targetSdk versions.targetSdk
+        versionCode versions.versionCode
+        versionName versions.versionName
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        vectorDrawables {
+            useSupportLibrary true
+        }
+    }
+
+    buildTypes {
+
+        debug {
+            minifyEnabled false
+            debuggable true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+
+        release {
+            minifyEnabled true
+            debuggable false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_17.toString()
+    }
+
+    buildFeatures {
+        compose true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion '1.2.0'
+    }
+    packagingOptions {
+        resources {
+            excludes += '/META-INF/{AL2.0,LGPL2.1}'
+        }
+    }
+}
+
+dependencies {
+
+    implementation libs.coreKtx
+    implementation libs.lifecycleRuntimeKtx
+    implementation libs.activityCompose
+    implementation libs.composeUi
+    implementation libs.composeUiToolingPreview
+    implementation libs.composeMaterial
+    testImplementation libs.junit
+    androidTestImplementation libs.extJunit
+    androidTestImplementation libs.espressoCore
+    androidTestImplementation libs.composeUiTest
+    debugImplementation libs.composeUiTooling
+    debugImplementation libs.composeUiManifest
+    implementation  libs.hilt
+    kapt  libs.hiltCompiler
+    implementation  libs.retrofit
+    implementation libs.navigation
+    implementation libs.hiltNavigationCompose
+    implementation libs.lottie
+    implementation libs.composeConstraintLayout
+    implementation libs.gson
+
+}
